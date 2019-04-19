@@ -16,12 +16,14 @@ while True:
 			if user1 == 'help':								#	this area is for making
 				display.print_help2()						#	
 			elif user1 == 'im':								#
-				fname, lname, nname, birth, filename, digits, n = interactive.Question()
+				fname, lname, nname, birth, pet, filename, digits, n, reverse = interactive.Question()
 				day, month, year = interactive.birth_slice(birth)
 				dy, yd, my, ym, dm, md = interactive.birth_process(day, month, year)
 				birthday = [birth, day, month, year, dy, yd, my, ym, dm, md]
-				fnames, lnames, nnames = interactive.names_process(fname, lname, nname)
-				interactive.combinations(fnames, lnames, nnames, birthday, filename)
+				fnames, lnames, nnames, pets = interactive.names_process(fname, lname, nname, pet)
+				interactive.combinations(fnames, lnames, nnames, pets, birthday, filename)
+				if reverse == 'y':
+					interactive.combinations_reverse(fnames, lnames, nnames, birthday, filename)
 				if digits == 'y':
 					interactive.combination_digits(fnames, nnames, lnames, filename, n)
 
