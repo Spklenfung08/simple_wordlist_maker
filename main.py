@@ -15,7 +15,8 @@ while True:
 			user1 = input(' (make) >> ').lower()			#	make the word list.
 			if user1 == 'help':								#	this area is for making
 				display.print_help2()						#	
-			elif user1 == 'im':								#
+			elif user1 == 'im':
+				c('clear')									#
 				fname, lname, nname, birth, pet, filename, digits, n, reverse = interactive.Question()
 				day, month, year = interactive.birth_slice(birth)
 				dy, yd, my, ym, dm, md = interactive.birth_process(day, month, year)
@@ -26,6 +27,12 @@ while True:
 					interactive.combinations_reverse(fnames, lnames, nnames, birthday, filename)
 				if digits == 'y':
 					interactive.combination_digits(fnames, nnames, lnames, filename, n)
+				lines_of_file = 0
+				with open(filename, 'r') as f:
+					for i in f.readlines():
+						lines_of_file += 1
+				print('\n\n\t[+] ' + str(lines_of_file) + ' written in ' + filename + '.\n') # prints the number of lines in the wordlist.
+
 
 			elif user1 == 'back':							#
 				break										#

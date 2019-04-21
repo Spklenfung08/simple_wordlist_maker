@@ -1,17 +1,59 @@
+import display
+from os import system as c
+
 
 def Question():
+	display.im_help()
 	fname = ''
-	fname = input(' (make) >> First name: ')
+	fname = input(' (make) >> First name: ')				#	ask for firstname
 	while len(fname) < 3:
-		fname = input(' (make) >> Needed first name: ')
-	lname = input(' (make) >> Last name: ')
-	nname = input(' (make) >> Nickname: ')
-	birth = input(' (make) >> Birthday(mmddyyyy): ').strip()
-	pet = input(' (make) >> Pet name: ')
-	digits = input(' (make) >> Would you like to add number in every last word?(y/n | default=N): ').lower()
+		fname = input(' (make) >> Needed first name: ')		#	if invalid ask again
+	c('clear')
+	display.im_help()
+	print('\tFirst Name => ' + fname.capitalize() + '\n')
+
+	lname = input(' (make) >> Last name: ')					#	ask for lastname
+	c('clear')
+	if lname == '' or lname == ' ' or lname == '  ':
+		display.im_help()
+		print('\tLast Name => not set\n')
+	else:
+		display.im_help()
+		print('\tLast Name => ' + lname.capitalize() + '\n')
+
+	nname = input(' (make) >> Nickname: ')					#	ask for nickname
+	c('clear')
+	if nname == '' or nname == ' ' or nname == '  ':
+		display.im_help()
+		print('\tNickname => not set\n')
+	else:
+		display.im_help()
+		print('\tNickname => ' + nname.capitalize() + '\n')
+
+	birth = input(' (make) >> Birthday(mmddyyyy): ').strip()#	ask for birthday
+	c('clear')
+	if birth == '' or birth == ' ' or birth == '  ':
+		display.im_help()
+		print('\tBirthday => not set\n ')
+	else:
+		display.im_help()
+		print('\tBirthday => ' + birth[0:2], birth[2:4], birth[4:] + '\n')
+
+	pet = input(' (make) >> Pet name: ')					# ask for pet name
+	c('clear')
+	if pet == '' or pet == ' ' or pet == '  ':
+		display.im_help()
+		print('\tPet => not set\n')
+	else:
+		display.im_help()
+		print('\tPet => ' + pet.capitalize() + '\n')
+	if lname == '' and nname == '' and pet == '' and birth == '':
+		digits = 'y'
+	else:
+		digits = input(' (make) >> Would you like to add number in every last word?(y/n | default=N): ').lower()
 	n = 0
 	if digits == 'y':
-		n = int(input(' (make) >> Digit number: '))
+		n = int(input(' (make) >> Digit number in the end(e.g if 2, then name10, name11, ...): '))
 	reverse = input(' (make) >> Do you want to reverse the names?(y/n | default=N): ').lower()
 	filename = input(' (make) >> Filename: ') + '.txt'
 	return fname, lname, nname, birth, pet, filename, digits, n, reverse
@@ -47,33 +89,33 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 		with open(filename, 'a') as f:			
 				f.write(fname1 + '\n')		# firstname						
 		for lname1 in lname:
-			if lname1 == '' and ' ' and '  ':
+			if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 				break
 			else:
 				with open(filename, 'a') as f:											
 					f.write(fname1 + lname1 + '\n')	# firstname plus lastname
 					f.write(fname1 + '_' + lname1 + '\n')	# with underscore
 				for birth in birthday:
-					if birth == '' and ' ' and '  ':
+					if birth == '' or birth == ' ' or birth == '  ':
 						pass
 					else:
 						with open(filename, 'a') as f:
 							f.write(fname1 + lname1 + birth + '\n')	# firstname plus lastname plus birthday
 		for nname1 in nname:
-			if nname1 == '' and ' ' and '  ':
+			if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 				break
 			else:
 				with open(filename, 'a') as f:
 					f.write(fname1 + nname1 + '\n')			# firstname plus nickname
 					f.write(fname1 + '_' + nname1 + '\n')	# with underscore
 				for birth in birthday:
-					if birth == '' and ' ' and '  ':
+					if birth == '' or birth == ' ' or birth == '  ':
 						break
 					else:
 						with open(filename, 'a') as f:
 							f.write(fname1 + nname1 + birth + '\n') # firstname plus lastname plus birthday
 		for birth in birthday:
-			if birth == '' and ' ' and '  ':
+			if birth == '' or birth == ' ' or birth == '  ':
 				pass
 			else:
 				with open(filename, 'a') as f:
@@ -82,7 +124,7 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 					f.write(birth + fname1 + '\n')		# firstname plus birthday vice-versa
 					f.write(birth + '_' + fname1 + '\n')# with underscore
 		for petn in pet:
-				if petn == '' and ' ' and '  ':
+				if petn == '' or petn == ' ' or petn == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
@@ -90,20 +132,20 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 						f.write(fname1 + '_' + petn + '\n') # with underscore
 
 	for nname1 in nname:
-		if nname1 == '' and ' ' and '  ':
+		if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 			break
 		else:						
 			with open(filename, 'a') as f:			
 				f.write(nname1 + '\n')	# nickname
 			for lname1 in lname:
-				if lname1 == '' and ' ' and '  ':
+				if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
 						f.write(nname1 + lname1 + '\n')	# nickname plus lastname
 						f.write(nname1 + '_' + lname1 + '\n')	# with underscore
 					for birth in birthday:
-						if birth == '' and ' ' and '  ':
+						if birth == '' or birth == ' ' or birth == '  ':
 							break
 						else:
 							with open(filename, 'a') as f:
@@ -113,13 +155,13 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 					f.write(nname1 + fname1 + '\n')	# nickname plus firstname
 					f.write(nname1 + '_' + fname1 + '\n') # with underscore
 				for birth in birthday:
-					if birth == '' and ' ' and '  ':
+					if birth == '' or birth == ' ' or birth == '  ':
 						break
 					else:
 						with open(filename, 'a') as f:
 							f.write(nname1 + fname1 + birth + '\n') # nickname plus firstname plus birthday
 			for birth in birthday:
-				if birth == '' and ' ' and '  ':
+				if birth == '' or birth == ' ' or birth == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
@@ -128,7 +170,7 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 						f.write(birth + nname1 + '\n')
 						f.write(birth + '_' + nname1 + '\n') # with underscore
 			for petn in pet:
-				if petn == '' and ' ' and '  ':
+				if petn == '' or petn == ' ' or petn == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
@@ -136,7 +178,7 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 						f.write(nname1 + '_' + petn + '\n') # with underscore
 
 	for lname1 in lname:
-		if lname1 == '' and ' ' and '  ':
+		if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 			pass
 		else:
 			with open(filename, 'a') as f:			
@@ -146,26 +188,26 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 					f.write(lname1 + fname1 + '\n') # lastname plus firstname
 					f.write(lname1 + '_' + fname1 + '\n') # with underscore
 				for birth in birthday:
-					if birth == '' and ' ' and '  ':
+					if birth == '' or birth == ' ' or birth == '  ':
 						pass
 					else:
 						with open(filename, 'a') as f:
 							f.write(lname1 + fname1 + birth + '\n')	# lastname plus firstname plus birthday
 			for nname1 in nname:
-				if nname1 == '' and ' ' and '  ':
+				if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 					pass
 				else:
 					with open(filename, 'a') as f:
 						f.write(lname1 + nname1 + '\n') # lastname plus nickname
 						f.write(lname1 + '_' + nname1 + '\n') # with underscore
 					for birth in birthday:
-						if birth == '' and ' ' and '  ':
+						if birth == '' or birth == ' ' or birth == '  ':
 							pass
 						else:
 							with open(filename, 'a') as f:
 								f.write(lname1 + nname1 + birth + '\n')
 			for birth in birthday:
-				if birth == '' and ' ' and '  ':
+				if birth == '' or birth == ' ' or birth == '  ':
 					pass
 				else:
 					with open(filename, 'a') as f:
@@ -174,7 +216,7 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 						f.write(birth + lname1 + '\n')
 						f.write(birth + '_' + lname1 + '\n') # with underscore
 			for petn in pet:
-				if petn == '' and ' ' and '  ':
+				if petn == '' or petn == ' ' or petn == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
@@ -182,7 +224,7 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 						f.write(lname1 + '_' + petn + '\n') # with underscore
 
 	for petn in pet:
-		if petn == '' and ' ' and '  ':
+		if petn == '' or petn == ' ' or petn == '  ':
 			break
 		else:
 			with open(filename, 'a') as f:
@@ -192,14 +234,14 @@ def combinations(fname, lname, nname, pet, birthday, filename):
 					f.write(petn + fname1 + '\n') 	# pet name plus first name
 					f.write(petn + '_' + fname1 + '\n')	# with underscore
 			for lname1 in lname:
-				if lname1 == '' and ' ' and '  ':
+				if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
 						f.write(petn + lname1 + '\n') # pet name plus last name
 						f.write(petn + '_' + lname1 + '\n') # with underscore
 			for nname1 in nname:
-				if nname1 == '' and ' ' and '  ':
+				if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
@@ -212,50 +254,50 @@ def combinations_reverse(fname, lname, nname, birthday, filename):
 		with open(filename, 'a') as f:			
 			f.write(fname1[::-1] + '\n')		# firstname
 		for lname1 in lname:
-			if lname1 == '' and ' ' and '  ':
+			if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 				break		
 			else:			
 				with open(filename, 'a') as f:		
 					f.write(fname1[::-1] + lname1[::-1] + '\n')	# firstname plus lastname						
 				for birth in birthday:
-					if birth == '' and ' ' and '  ':
+					if birth == '' or birth == ' ' or birth == '  ':
 						break
 					else:
 						with open(filename, 'a') as f:
 							f.write(fname1[::-1] + lname1[::-1] + birth + '\n')	# firstname plus lastname plus birthday
 		for nname1 in nname:
-			if nname1 == '' and ' ' and '  ':
+			if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 				break
 			else:
 				with open(filename, 'a') as f:
 					f.write(fname1[::-1] + nname1[::-1] + '\n')			# firstname plus nickname 
 				for birth in birthday:
-					if birth == '' and ' ' and '  ':
+					if birth == '' or birth == ' ' or birth == '  ':
 						break
 					else:
 						with open(filename, 'a') as f:
 							f.write(fname1[::-1] + nname1[::-1] + birth + '\n') # firstname plus lastname plus birthday
 		for birth in birthday:
-			if birth == '' and ' ' and '  ':
+			if birth == '' or birth == ' ' or birth == '  ':
 				break
 			else:
  				with open(filename, 'a') as f:
  					f.write(fname1[::-1] + birth + '\n')
  					f.write(birth + fname1[::-1] + '\n')	# firstname plus birthday vice-versa
 	for nname1 in nname:
-		if nname1 == '' and ' ' and '  ':
+		if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 			break
 		else:
 			with open(filename, 'a') as f:			
 				f.write(nname1[::-1] + '\n')	# nickname
 			for lname1 in lname:
-				if lname1 == '' and ' ' and '  ':
+				if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
 						f.write(nname1[::-1] + lname1[::-1] + '\n')	# nickname plus lastname
 			for birth in birthday:
-				if birth == '' and ' ' and '  ':
+				if birth == '' or birth == ' ' or birth == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
@@ -264,13 +306,13 @@ def combinations_reverse(fname, lname, nname, birthday, filename):
 			with open(filename, 'a') as f:
 				f.write(nname1[::-1] + fname1[::-1] + '\n')	# nickname plus firstname
 			for birth in birthday:
-				if birth == '' and ' ' and '  ':
+				if birth == '' or birth == ' ' or birth == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
 						f.write(nname1[::-1] + fname1[::-1] + birth + '\n') # nickname plus firstname plus birthday
 		for birth in birthday:
-			if birth == '' and ' ' and '  ':
+			if birth == '' or birth == ' ' or birth == '  ':
 				break
 			else:
 				with open(filename, 'a') as f:
@@ -278,7 +320,7 @@ def combinations_reverse(fname, lname, nname, birthday, filename):
 					f.write(birth + nname1[::-1] + '\n')
 
 	for lname1 in lname:
-		if lname1 == '' and ' ' and '  ':
+		if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 			break
 		else:
 			with open(filename, 'a') as f:			
@@ -287,25 +329,25 @@ def combinations_reverse(fname, lname, nname, birthday, filename):
 				with open(filename, 'a') as f:
 					f.write(lname1[::-1] + fname1[::-1] + '\n') # lastname plus firstname
 			for birth in birthday:
-				if birth == '' and ' ' and '  ':
+				if birth == '' or birth == ' ' or birth == '  ':
 					break
 				else:
 					with open(filename, 'a') as f:
 						f.write(lname1[::-1] + fname1[::-1] + birth + '\n')	# lastname plus firstname plus birthday
 		for nname1 in nname:
-			if nname1 == '' and ' ' and '  ':
+			if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 				break
 			else: 
 				with open(filename, 'a') as f:
 					f.write(lname1[::-1] + nname1[::-1] + '\n') # lastname plus nickname
 				for birth in birthday:
-					if birth == '' and ' ' and '  ':
+					if birth == '' or birth == ' ' or birth == '  ':
 						break
 					else:
 						with open(filename, 'a') as f:
 							f.write(lname1[::-1] + nname1[::-1] + birth + '\n')
 		for birth in birthday:
-			if birth == '' and ' ' and '  ':
+			if birth == '' or birth == ' ' or birth == '  ':
 				break
 			else:
 				with open(filename, 'a') as f:
@@ -332,14 +374,14 @@ def combination_digits(fname, nname, lname, filename, n):
 			with open(filename, 'a') as f:			
 				f.write(fname1 + str(n) + '\n')		# firstname numbers
 		for lname1 in lname:
-			if lname1 == '' and ' ' and '  ':
+			if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 				break
 			else:
 				for n in range(x, y):					
 					with open(filename, 'a') as f:		
 						f.write(fname1 + lname1 + str(n) + '\n')	# firstname plus lastname numbers
 		for nname1 in nname:
-			if nname1 == '' and ' ' and '  ':
+			if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 				break
 			else:
 				for n in range(x, y):
@@ -347,14 +389,14 @@ def combination_digits(fname, nname, lname, filename, n):
 						f.write(fname1 + nname1 + str(n) + '\n') # firstname plus nickname numbers
 
 	for nname1 in nname:
-		if nname1 == '' and ' ' and '  ':
+		if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 			break
 		else:
 			for n in range(x, y):						
 				with open(filename, 'a') as f:			
 					f.write(nname1 + str(n) + '\n')	# nickname numbers
 		for lname1 in lname:
-			if lname1 == '' and ' ' and '  ':
+			if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 				break
 			else:
 				for n in range(x, y):
@@ -366,7 +408,7 @@ def combination_digits(fname, nname, lname, filename, n):
 					f.write(nname1 + fname1 + str(n) + '\n')	# nickname plus firstname numbers
 
 	for lname1 in lname:
-		if lname1 == '' and ' ' and '  ':
+		if lname1 == '' or lname1 == ' ' or lname1 == '  ':
 			break
 		else:
 			for n in range(x, y):
@@ -377,7 +419,7 @@ def combination_digits(fname, nname, lname, filename, n):
 				with open(filename, 'a') as f:
 					f.write(lname1 + fname1 + str(n) + '\n') # lastname plus firstname numbers
 		for nname1 in nname:
-			if nname1 == '' and ' ' and '  ':
+			if nname1 == '' or nname1 == ' ' or nname1 == '  ':
 				break
 			else:
 				for n in range(x, y):

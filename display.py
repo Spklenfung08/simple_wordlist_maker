@@ -11,6 +11,9 @@ def banner(): # This prints the banner.
 	Made by Jong!
 		''')
 
+def im_help():	# simple interactive help.
+	print('\n\tIf you don\'t know just press enter.\n')
+
 
 def print_help1():
 	first_help = '''
